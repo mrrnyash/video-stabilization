@@ -1,20 +1,17 @@
-import java.awt.*;
+import javax.swing.*;
 
+public class MyGUIProgram {
 
-public class MyGUIProgram extends Frame {
-
+    JFrame f;
 
     MyGUIProgram() {
-        Button b = new Button("Click!");
-        b.setBounds(30, 100, 80, 30);
-        add(b);
-        TextField t = new TextField();
-        t.setBounds(10, 50, 150, 30);
-        add(t);
-        setSize(800, 600);
-        setTitle("Example");
-        setLayout(null);
-        setVisible(true);
-
+        f = new JFrame();
+        JButton openButton = new JButton("Открыть");
+        openButton.setBounds(130,100,100,40);
+        f.add(openButton);
+        f.setSize(400,500);
+        f.setLayout(null);
+        f.setVisible(true);
     }
+
 }
