@@ -7,7 +7,6 @@ public class MyGUIProgram {
 
     MyGUIProgram() {
         new MyFrame();
-
     }
 
 }

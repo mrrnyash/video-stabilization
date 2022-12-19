@@ -1,5 +1,16 @@
 package algorithms;
 
-public class Pearson {
+import java.util.ArrayList;
 
+public class Pearson implements StabilizationAlgorithm {
+
+    @Override
+    public ArrayList<Integer> getShifts() {
+        return null;
+    }
+
+    @Override
+    public void stabilize() {
+
+    }
 }

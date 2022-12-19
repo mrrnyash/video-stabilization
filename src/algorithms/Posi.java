@@ -1,5 +1,16 @@
 package algorithms;
 
-public class Posi {
+import java.util.ArrayList;
 
+public class Posi implements StabilizationAlgorithm {
+
+    @Override
+    public ArrayList<Integer> getShifts() {
+        return null;
+    }
+
+    @Override
+    public void stabilize() {
+
+    }
 }
