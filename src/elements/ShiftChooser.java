@@ -1,2 +1,8 @@
-package elements;public class ShiftChooser {
+package elements;
+
+import javax.swing.*;
+
+public class ShiftChooser extends JFrame {
+
+
 }

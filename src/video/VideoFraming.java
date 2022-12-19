@@ -1,6 +1,6 @@
 package video;
 
-public class Framing {
+public class VideoFraming {
 
 
 }

@@ -1,2 +1,5 @@
-package video;public class ColorConverter {
+package video;
+
+public class ColorConverter {
+
 }
