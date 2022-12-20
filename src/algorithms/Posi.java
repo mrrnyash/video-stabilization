@@ -8,9 +8,5 @@ public class Posi implements StabilizationAlgorithm {
     public ArrayList<Integer> getShifts() {
         return null;
     }
-
-    @Override
-    public void stabilize() {
-
-    }
+    
 }

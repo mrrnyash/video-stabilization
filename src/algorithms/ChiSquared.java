@@ -10,8 +10,5 @@ public class ChiSquared implements StabilizationAlgorithm {
         return null;
     }
 
-    @Override
-    public void stabilize() {
 
-    }
 }

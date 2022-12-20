@@ -9,8 +9,4 @@ public class Pearson implements StabilizationAlgorithm {
         return null;
     }
 
-    @Override
-    public void stabilize() {
-
-    }
 }
