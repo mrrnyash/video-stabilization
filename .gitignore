@@ -2,6 +2,7 @@
 .idea/
 out/
 frames/
+frames_bw/
 result/
 
 # Package Files #
