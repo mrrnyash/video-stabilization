@@ -3,6 +3,7 @@
 out/
 frames/
 frames_bw/
+pixels_bw/
 result/
 
 # Package Files #
