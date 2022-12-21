@@ -1,3 +1,4 @@
+import elements.AnimatedGif;
 import elements.ConfirmButton;
 import elements.OpenButton;
 import pictures.GifFraming;
@@ -12,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MyFrame extends JFrame {
-    MyFrame() {
+public class MenuFrame extends JFrame {
+    MenuFrame() {
         // Configuration for stabilization
         Config config = new Config();
 
@@ -56,7 +57,7 @@ public class MyFrame extends JFrame {
 
         JLabel statusLabel = new JLabel();
         statusLabel.setFont(generalFont);
-      
+
 
         headerPanel.add(headerLabel);
         this.add(headerPanel);
@@ -252,14 +253,13 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     GifFraming.splitGif(config.getVideoFile());
+                    GifFraming.mergeFrames();
+                    new AnimatedGif();
                     if (config.getColormap() == 0) {
                         Grayscale.convertAll();
                         Pixels.getGrayscalePixelArray();
                     }
-                    if (config.getColormap() == 1) {
-                        // TODO
 
-                    }
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

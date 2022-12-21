@@ -1,8 +1,8 @@
 package algorithms;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public interface StabilizationAlgorithm {
-    public ArrayList<Integer> getShifts();
-
+    public Integer[] getShift(String filePath) throws IOException;
+    
 }

@@ -1,20 +1,15 @@
-import pictures.GifFraming;
-
-import java.io.IOException;
-
 public class Program {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         run();
 //        test();
     }
 
-    public static void run() throws IOException {
-        MyGUIProgram myGUIProgram = new MyGUIProgram();
+    public static void run() {
+        new MenuFrame();
     }
 
-    public static void test() throws IOException {
-//        Pixels.getGrayscalePixelArray();
-        GifFraming.mergeFrames();
-    }
+    public static void test() {
 
+
+    }
 }

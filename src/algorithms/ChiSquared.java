@@ -1,14 +1,14 @@
 package algorithms;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class ChiSquared implements StabilizationAlgorithm {
 
-
     @Override
-    public ArrayList<Integer> getShifts() {
+    public Integer[] getShift(String filepath) throws IOException {
+
         return null;
     }
-
+    
 
 }
