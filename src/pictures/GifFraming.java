@@ -1,4 +1,6 @@
-package video;
+package pictures;
+
+import gif.AnimatedGifEncoder;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -8,8 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class VideoFraming {
-    public static void splitVideo(String videoFile) throws IOException {
+public class GifFraming {
+    public static void splitGif(String videoFile) throws IOException {
         File framesDir = new File("frames");
         try {
             if (framesDir.mkdir())
@@ -31,8 +33,8 @@ public class VideoFraming {
     // Merge all frames in directory
     public static void mergeFrames() throws IOException {
 
-
-        File dir = new File("frames/");
+//        File dir = new File("frames/");
+        File dir = new File("frames_bw");
         /* File dir = new File("frames_cropped"); */
         File[] framesCropped = dir.listFiles();
 
@@ -48,16 +50,25 @@ public class VideoFraming {
 
 
         // Ordered array of frames
-        String[] args = new String[framesCropped.length];
+        String[] framesName = new String[framesCropped.length];
+        BufferedImage[] images = new BufferedImage[framesCropped.length];
+
         FileNameNumericSort.sortByNumber(framesCropped);
+        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
 
         // Convert to String list
         for (int i = 0; i < framesCropped.length; i++) {
-            args[i] = framesCropped[i].getPath();
+            framesName[i] = framesCropped[i].getPath();
+            images[i] = ImageIO.read(framesCropped[i]);
         }
 
-        // TODO: Convert frames to GIF 
-        
+
+        // Merge images
+        encoder.start("result/result.gif");
+        for (BufferedImage image : images) {
+            encoder.addFrame(image);
+        }
+        encoder.finish();
 
     }
 

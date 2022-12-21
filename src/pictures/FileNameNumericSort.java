@@ -1,4 +1,4 @@
-package video;
+package pictures;
 
 import java.io.File;
 import java.util.Arrays;

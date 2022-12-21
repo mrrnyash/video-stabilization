@@ -1,11 +1,11 @@
-import video.VideoFraming;
+import pictures.GifFraming;
 
 import java.io.IOException;
 
 public class Program {
     public static void main(String[] args) throws IOException {
-//        run();
-        test();
+        run();
+//        test();
     }
 
     public static void run() throws IOException {
@@ -14,7 +14,7 @@ public class Program {
 
     public static void test() throws IOException {
 //        Pixels.getGrayscalePixelArray();
-        VideoFraming.mergeFrames();
+        GifFraming.mergeFrames();
     }
 
 }

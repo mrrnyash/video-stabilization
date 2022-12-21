@@ -1,11 +1,9 @@
-package video;
+package pictures;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Pixels {
 
@@ -26,9 +24,10 @@ public class Pixels {
 
         File framesDir = new File("frames");
         // Loop through frames
-        BufferedImage img = null;
+        BufferedImage img;
         File[] frames = framesDir.listFiles();
         // Matrix of pixels
+        assert frames != null;
         for (File frame : frames) {
             Integer[][] pixelsMatrix = new Integer[0][];
             try {
@@ -45,7 +44,7 @@ public class Pixels {
                         // Get pixel value
                         int p = img.getRGB(x, y);
                         // Get alpha
-                        int a = (p >> 24) & 0xff;
+//                        int a = (p >> 24) & 0xff;
                         // Get red
                         int r = (p >> 16) & 0xff;
                         // Get green
@@ -66,11 +65,11 @@ public class Pixels {
             String frameName = frame.getName().substring(0, frame.getName().lastIndexOf("."));
             File f = new File(pixelsDir + "/" + frameName + ".txt");
             outputWriter = new BufferedWriter(new FileWriter(f));
-            int arrayWidth = pixelsMatrix.length;
+//            int arrayWidth = pixelsMatrix.length;
             int arrayHeight = pixelsMatrix[0].length;
-            for (int i = 0; i < arrayWidth; i++) {
+            for (Integer[] matrix : pixelsMatrix) {
                 for (int j = 0; j < arrayHeight; j++) {
-                    outputWriter.write(pixelsMatrix[i][j] + " ");
+                    outputWriter.write(matrix[j] + " ");
                 }
                 outputWriter.newLine();
             }
@@ -78,5 +77,14 @@ public class Pixels {
             outputWriter.close();
 
         }
+    }
+
+
+    public static ArrayList<ArrayList<Integer>> readPixelsMatrix(String filepath) throws FileNotFoundException {
+        ArrayList<ArrayList<Integer>> pixels = new ArrayList<ArrayList<Integer>>();
+        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+        // TODO
+        return null;
+
     }
 }

@@ -1,4 +1,4 @@
-package video;
+package pictures;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

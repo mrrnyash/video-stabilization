@@ -1,6 +1,8 @@
 import elements.ConfirmButton;
 import elements.OpenButton;
-import video.VideoFraming;
+import pictures.GifFraming;
+import pictures.Grayscale;
+import pictures.Pixels;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -54,7 +56,7 @@ public class MyFrame extends JFrame {
 
         JLabel statusLabel = new JLabel();
         statusLabel.setFont(generalFont);
-
+      
 
         headerPanel.add(headerLabel);
         this.add(headerPanel);
@@ -249,7 +251,16 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    VideoFraming.splitVideo(config.getVideoFile());
+                    GifFraming.splitGif(config.getVideoFile());
+                    if (config.getColormap() == 0) {
+                        Grayscale.convertAll();
+                        Pixels.getGrayscalePixelArray();
+                    }
+                    if (config.getColormap() == 1) {
+                        // TODO
+
+                    }
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
