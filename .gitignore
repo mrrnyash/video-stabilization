@@ -5,6 +5,7 @@ out/
 # Project specific
 frames/
 frames_bw/
+frames_cropped/
 result/
 pixels_bw/
 

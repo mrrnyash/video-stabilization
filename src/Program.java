@@ -1,5 +1,9 @@
+import algorithms.ChiSquared;
+
+import java.io.IOException;
+
 public class Program {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         run();
 //        test();
     }
@@ -8,7 +12,9 @@ public class Program {
         new MenuFrame();
     }
 
-    public static void test() {
+    public static void test() throws IOException {
+        ChiSquared c = new ChiSquared();
+        c.runStabilization();
 
 
     }

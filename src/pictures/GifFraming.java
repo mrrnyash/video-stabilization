@@ -4,6 +4,7 @@ import gif.AnimatedGifEncoder;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,13 +22,6 @@ public class GifFraming {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        ImageReader reader = ImageIO.getImageReadersBySuffix("GIF").next();
-//        ImageInputStream in = ImageIO.createImageInputStream(new FileInputStream(videoFile));
-//        reader.setInput(in);
-//        for (int i = 0, count = reader.getNumImages(true); i < count; i++) {
-//            BufferedImage image = reader.read(i);
-//            ImageIO.write(image, "PNG", new File(framesDir + "/" + i + ".png"));
-//        }
 
         ImageReader reader = ImageIO.getImageReadersBySuffix("gif").next();
         reader.setInput(ImageIO.createImageInputStream(new FileInputStream(videoFile)), false);
@@ -54,10 +48,9 @@ public class GifFraming {
     }
 
     // Merge all frames in directory
-    public static void mergeFrames() throws IOException {
+    public static void mergeFrames(String directory) throws IOException {
 
-        File dir = new File("frames/");
-        /* File dir = new File("frames_cropped"); */
+        File dir = new File(directory);
         File[] framesCropped = dir.listFiles();
 
         File outputDir = new File("result");
@@ -87,7 +80,7 @@ public class GifFraming {
 
         // Merge images
         encoder.start("result/result.gif");
-        encoder.setFrameRate(15);
+        encoder.setFrameRate(25);
         encoder.setRepeat(1000);
         for (BufferedImage image : images) {
             encoder.addFrame(image);
@@ -96,15 +89,22 @@ public class GifFraming {
 
     }
 
-
-    // Crop all frames in directory according to shifts and save file
-    public static void cropFrames() {
-
+    public static BufferedImage copyImage(BufferedImage source) {
+        BufferedImage b = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
+        Graphics g = b.getGraphics();
+        g.drawImage(source, 0, 0, null);
+        g.dispose();
+        return b;
     }
 
-    public static BufferedImage cropImage(BufferedImage bufferedImage, int x, int y, int width, int height) {
-        return bufferedImage.getSubimage(x, y, width, height);
+    public static BufferedImage convertToARGB(BufferedImage image) {
+        BufferedImage newImage = new BufferedImage(
+                image.getWidth(), image.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
     }
-
 
 }

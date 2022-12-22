@@ -1,6 +1,8 @@
+import algorithms.ChiSquared;
 import elements.AnimatedGif;
 import elements.ConfirmButton;
 import elements.OpenButton;
+import elements.ShowResultsButton;
 import pictures.GifFraming;
 import pictures.Grayscale;
 import pictures.Pixels;
@@ -21,6 +23,7 @@ public class MenuFrame extends JFrame {
         // Buttons
         OpenButton openButton = new OpenButton();
         ConfirmButton confirmButton = new ConfirmButton();
+        ShowResultsButton showResultsButton = new ShowResultsButton();
 
         // Panels
         JPanel headerPanel = new JPanel();
@@ -72,41 +75,42 @@ public class MenuFrame extends JFrame {
         ButtonGroup colormapChooser = new ButtonGroup();
 
         JRadioButton grayscale = new JRadioButton("Grayscale");
-        grayscale.setSelected(true);
         grayscale.setFont(generalFont);
 
         JRadioButton RGB = new JRadioButton("RGB");
+        RGB.setSelected(true);
         RGB.setFont(generalFont);
-        RGB.setEnabled(false);
 
-        colormapChooser.add(grayscale);
         colormapChooser.add(RGB);
+        colormapChooser.add(grayscale);
 
         colormapPanel.add(colormapLabel);
-        colormapPanel.add(grayscale);
         colormapPanel.add(RGB);
+        colormapPanel.add(grayscale);
         this.add(colormapPanel);
 
         // Algorithm panel
         ButtonGroup algorithmChooser = new ButtonGroup();
 
-        JRadioButton pearson = new JRadioButton("Пирсон");
-        pearson.setSelected(true);
-        pearson.setFont(generalFont);
 
         JRadioButton chiSquared = new JRadioButton("Хи-квадрат");
+        chiSquared.setSelected(true);
         chiSquared.setFont(generalFont);
+
+        JRadioButton pearson = new JRadioButton("Пирсон");
+        pearson.setFont(generalFont);
 
         JRadioButton posi = new JRadioButton("ПОСИ");
         posi.setFont(generalFont);
 
-        algorithmChooser.add(pearson);
+
         algorithmChooser.add(chiSquared);
+        algorithmChooser.add(pearson);
         algorithmChooser.add(posi);
 
         algorithmPanel.add(algorithmLabel);
-        algorithmPanel.add(pearson);
         algorithmPanel.add(chiSquared);
+        algorithmPanel.add(pearson);
         algorithmPanel.add(posi);
         this.add(algorithmPanel);
 
@@ -117,8 +121,8 @@ public class MenuFrame extends JFrame {
         tenPercent.setSelected(true);
         tenPercent.setFont(generalFont);
 
-        JRadioButton thirtyPercent = new JRadioButton("30%");
-        thirtyPercent.setFont(generalFont);
+        JRadioButton twentyPercent = new JRadioButton("20%");
+        twentyPercent.setFont(generalFont);
 
         JRadioButton fiftyPercent = new JRadioButton("50%");
         fiftyPercent.setFont(generalFont);
@@ -131,14 +135,14 @@ public class MenuFrame extends JFrame {
         auto.setEnabled(false);
 
         shiftChooser.add(tenPercent);
-        shiftChooser.add(thirtyPercent);
+        shiftChooser.add(twentyPercent);
         shiftChooser.add(fiftyPercent);
         shiftChooser.add(ninetyPercent);
         shiftChooser.add(auto);
 
         shiftPanel.add(shiftLabel);
         shiftPanel.add(tenPercent);
-        shiftPanel.add(thirtyPercent);
+        shiftPanel.add(twentyPercent);
         shiftPanel.add(fiftyPercent);
         shiftPanel.add(ninetyPercent);
         shiftPanel.add(auto);
@@ -146,6 +150,7 @@ public class MenuFrame extends JFrame {
 
         // Confirm panel
         confirmPanel.add(confirmButton);
+        confirmPanel.add(showResultsButton);
         this.add(confirmPanel);
 
         // Adding elements to the frame
@@ -219,7 +224,7 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        thirtyPercent.addActionListener(new ActionListener() {
+        twentyPercent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 config.setShift(1);
@@ -253,17 +258,26 @@ public class MenuFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     GifFraming.splitGif(config.getVideoFile());
-                    GifFraming.mergeFrames();
-                    new AnimatedGif();
                     if (config.getColormap() == 0) {
                         Grayscale.convertAll();
                         Pixels.getGrayscalePixelArray();
                     }
+                    ChiSquared c = new ChiSquared();
+                    c.runStabilization();
+                    GifFraming.mergeFrames("frames_cropped");
+                    new AnimatedGif("result/result.gif");
 
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
+        });
+
+        showResultsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new AnimatedGif("result/result.gif");
             }
         });
 
